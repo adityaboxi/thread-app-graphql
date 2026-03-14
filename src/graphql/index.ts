@@ -1,25 +1,17 @@
-import { ApolloServer } from "@apollo/server";
+import { ApolloServer } from '@apollo/server';
 import { user } from './user';
-import { typedefs } from "./user/typedefs";
 
 async function createApolloGraphqlServer() {
-    const gqlServer = new ApolloServer({
-        typeDefs: 
-        typedefs,
-       resolvers: {
-      Query: {
-       ...user.resolvers.queris,
-      },
-      Mutation: { ...user.resolvers.mutations,
-      },
+  const gqlServer = new ApolloServer({
+    typeDefs: user.typedefs,
+    resolvers: {
+      Query: user.queries,
+      Mutation: user.mutations,
     },
-      });
-    
-      await gqlServer.start();
+  });
 
-    return gqlServer;
+  await gqlServer.start();
+  return gqlServer;
 }
 
-
-
-export default  createApolloGraphqlServer;
+export default createApolloGraphqlServer;
