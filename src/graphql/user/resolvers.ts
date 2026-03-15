@@ -10,6 +10,15 @@ export const queries = {
     const token = await UserService.getUserToken({ email, password });
     return token;
   },
+  getCurrentLoggedInUser: async (_: any, parameters: any, context: any) => {
+    // console.log(context);
+    if (context && context.user) {
+      const id = context.user.id;
+      const user = await UserService.grtUserById(id);
+      return user;
+    }
+     throw new  Error('i dont know who are you ?');
+  }
 };
 
 export const mutations = {
